@@ -1,13 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./NavBar.css";
 import { NavLink } from "react-router-dom";
-import { Navbar, Nav, NavItem} from "reactstrap";
+import { Navbar, Nav, NavItem } from "reactstrap";
+//import Login from "./Login";
+import logout from './Login';
+//import user from './Login';
 
-function NavBar() {
+const NavBar = ({user, setUser}) => {
+  
+  // const [user, setUser] = useState('');
+
+  // useEffect(() => {
+  //   const isLoggedIn = () => {
+  //     if(user)setUser(localStorage.getItem('username'));
+  //   }
+    
+  // }, [user]);
+  
+
+  //console.log("isloggedin ", isLoggedIn)
   return (
     <div>
       <Navbar expand="md">
-        <Nav>
+        {user && <Nav>
           <NavItem>
             <NavLink to="/">Home</NavLink>
           </NavItem> 
@@ -23,14 +38,14 @@ function NavBar() {
           <NavItem>
             <NavLink to="/music">Music</NavLink>
           </NavItem>
-        </Nav>
+        </Nav>}
         <Navbar>
           <NavItem>
-            <NavLink to="/login">Login</NavLink>
+            {user ? <NavLink to="/logout"> Logout</NavLink> : <NavLink to="/login"> Login</NavLink>}
           </NavItem>
-          <NavItem>
+          {!user && <NavItem>
             <NavLink to="/register">Register</NavLink>
-          </NavItem>
+          </NavItem>}
         </Navbar>
       </Navbar>
     </div>

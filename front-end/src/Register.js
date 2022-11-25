@@ -11,7 +11,7 @@ function Register() {
 
   return (
     <div>
-      <p> Welcome back {data.username}! </p>
+      <p> Welcome {data.username}! </p>
     </div>
   );
 }

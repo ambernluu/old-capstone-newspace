@@ -1,22 +1,40 @@
-const BASE_API_URL = "http://localhost:3001";
+const BASE_API_URL = "http://localhost:5000";
 
 
-  export const authenticateUser = async (params) => {
-    const body = {
-      "username": `${params.username}`,
-      "password": `${params.password}`
-    }
+export const authenticateUser = async (params) => {
 
-    const response = await fetch(`${BASE_API_URL}/auth/token`, {
-      headers: {
-        'content-type': 'application/json'
-      },
-      method: 'POST',
-      body: JSON.stringify(body)
-    })
-
-    return await response.json();
+  const body = {
+    "username": `${params.username}`,
+    "password": `${params.password}`
   }
+
+  const response = await fetch(`${BASE_API_URL}/auth/token`, {
+    headers: {
+      'content-type': 'application/json'
+    },
+    method: 'POST',
+    body: JSON.stringify(body)
+  })
+
+  const status = response.status;
+  //console.log({ status })
+
+  if (status === 200) {
+    return response.json();
+    // console.log(await response.json());
+    // return {
+    //   token: await response.json()
+    // }
+  }
+
+  if (status === 401) {
+    throw new Error('incorrect username/password');
+  }
+  
+  else {
+    throw new Error('something happened');
+  }
+}
 
 export const RegisterUser = async (params) => {
   const body = {

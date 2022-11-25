@@ -6,9 +6,12 @@ import './App.css';
 import SearchForm from "./forms/SearchForm";
 import Login from "./Login";
 import Register from "./Register";
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+import Profile from "./Profile"
+import Logout from "./Logout";
+//<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
 const App = () => {
+  const [user, setUser] = useState('');
   // const [documents, setDocuments] = useState(null);
 
   // useEffect(() => {
@@ -19,19 +22,25 @@ const App = () => {
   //   getDocuments();
   // }, []);
   // console.log({ documents });
+
   return (
     <div className="App">
       <BrowserRouter>
-        <NavBar />
+        <NavBar user={user} setUser={setUser} />
         <Routes>
           <Route path="/" element={<Home />}>
           </Route>
           <Route path="/search" element={<SearchForm />}>
           </Route>
-          <Route path="/login" element={<Login />}>
+          <Route path="/login" element={<Login user={user} setUser={setUser} />}>
+          </Route>
+          <Route path="/logout" element={<Logout user={user} setUser={setUser} />}>
           </Route>
           <Route path="/register" element={<Register />}>
           </Route>
+          <Route path="/profile" element={<Profile user={user} />}>
+          </Route>
+         
         </Routes>
       </BrowserRouter>
     </div>

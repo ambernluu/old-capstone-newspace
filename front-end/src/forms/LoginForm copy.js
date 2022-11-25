@@ -1,46 +1,32 @@
-
 import React, { useState } from 'react';
+//import { v4 as uuid } from 'uuid';
 import { Form, Label, Input, Button, Row, Col } from "reactstrap";
 import { authenticateUser } from '../helpers/api';
-import  isLoggedIn from "../NavBar";
 
-const LoginForm = ({ setData, setErr, setUser }) => {
+const LoginForm = ({ setData }) => {
     const initialState = {
         username: '',
         password: ''
     }
     const [formData, setFormData] = useState(initialState);
 
-    const handleChange = (event) => {
-        const { name, value } = event.target
+    const handleChange = (e) => {
+        const { name, value } = e.target
         setFormData(fData => ({
             ...fData,
             [name]: value
         }))
     }
 
-    const handleSubmit = async (event) => {
-        try {
-            event.preventDefault();
-            const token = await authenticateUser(formData);
-            setData(formData);
-            localStorage.setItem('username', formData.username);
-            localStorage.setItem('token', token.token)
-            setUser(localStorage.getItem('username'));
-            setErr('');
-            
-        } catch (e) {
-            console.log({ formData});
-            console.log(",msngsjdmfngkjsd,mfbngbjskd,fbngjksd,fgnjlsdfgnldjfn")
-            setFormData(initialState);
-            console.log({ formData });
-            setErr(e);
-        }
-
+    function setDataForParent(e) {
+        e.preventDefault();
+        console.log(e);
+        setData(formData);
+        authenticateUser(formData);
     }
 
     return (
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={setDataForParent}>
             <Row className="row-cols-lg-auto g-3 align-items-center">
                 <Col>
                     <Label

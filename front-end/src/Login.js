@@ -1,19 +1,27 @@
 import React from "react";
 import { useState } from "react";
-import LoginForm from "./forms/LoginForm"
+import LoginForm from "./forms/LoginForm";
+import { Navigate } from 'react-router';
+import Profile from "./Profile"
+//import { isLoggedIn, user } from "./helpers/authenticate"
+import NavBar from './NavBar'
 
 
-function Login() {
+const Login = ({user, setUser}) => {
   const [data, setData] = useState('');
+  const [err, setErr] = useState('');
 
-  if (!data) return <LoginForm setData={setData} />
+  if (!user) {
+    return (
+      <div>
+        <LoginForm setData={setData} setErr={setErr} setUser={setUser} />
+        {err.message}
+      </div>
+    )
+  }
+  return <Navigate push to="/profile" />
 
 
-  return (
-    <div>
-      <p> Welcome back {data.username}! </p>
-    </div>
-  );
 }
 
 export default Login;
