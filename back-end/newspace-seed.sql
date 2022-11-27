@@ -13,3 +13,13 @@ VALUES ('testuser',
         'Admin!',
         'joel@joelburton.com',
         TRUE);
+
+INSERT INTO posts (image_url, body, posted_at, posted_by)
+VALUES ('https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/cute-cat-photos-1593441022.jpg?crop=0.670xw:1.00xh;0.167xw,0&resize=640:*',
+        'Saw this really cute cat OMG',
+        '11-26-2022',
+        'testuser'),
+        ('https://hips.hearstapps.com/wdy.h-cdn.co/assets/17/39/1506709524-cola-0247.jpg?crop=1.00xw:0.750xh;0,0.226xh&resize=480:*',
+        'I love dogs so so much',
+        '11-26-2022',
+        'testadmin');

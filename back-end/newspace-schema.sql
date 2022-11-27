@@ -9,3 +9,10 @@ CREATE TABLE users (
   is_admin BOOLEAN NOT NULL DEFAULT FALSE
 );
 
+CREATE TABLE posts (
+    id SERIAL PRIMARY KEY,
+    image_url text,
+    body text NOT NULL,
+    posted_at timestamp with time zone NOT NULL,
+    posted_by text NOT NULL REFERENCES users(username)
+);
