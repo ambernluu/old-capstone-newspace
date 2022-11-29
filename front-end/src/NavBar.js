@@ -2,23 +2,17 @@ import React, { useEffect, useState } from "react";
 import "./NavBar.css";
 import { NavLink } from "react-router-dom";
 import { Navbar, Nav, NavItem } from "reactstrap";
-//import Login from "./Login";
-import logout from './Login';
-//import user from './Login';
 
 const NavBar = ({user, setUser}) => {
-  
-  // const [user, setUser] = useState('');
 
-  // useEffect(() => {
-  //   const isLoggedIn = () => {
-  //     if(user)setUser(localStorage.getItem('username'));
-  //   }
-    
-  // }, [user]);
+  useEffect(() => {
+    const isLoggedIn = () => {
+      setUser(localStorage.getItem('username'));
+    }
+    isLoggedIn();
+  }, [user]);
   
 
-  //console.log("isloggedin ", isLoggedIn)
   return (
     <div>
       <Navbar expand="md">

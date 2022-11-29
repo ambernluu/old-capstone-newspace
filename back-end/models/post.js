@@ -15,19 +15,18 @@ class Post {
    * Returns { id, imageUrl, body, postedAt, postedBy }
    **/
 
-  static async create({image_url, body, posted_at, posted_by}) {
+  static async create({image_url, body, posted_by}) {
     const result = await db.query(
       `INSERT INTO posts (image_url,
                              body,
                              posted_at,
                              posted_by)
-           VALUES ($1, $2, $3, $4)
+           VALUES ($1, $2, current_timestamp, $3)
            RETURNING id, image_url, body, posted_at, posted_by`,
       [
         image_url,
         body,
-        posted_at,
-        posted_by,
+        posted_by
       ]);
     let post = result.rows[0];
 

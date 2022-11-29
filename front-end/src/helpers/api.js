@@ -1,6 +1,5 @@
 const BASE_API_URL = "http://localhost:5000";
 
-
 export const authenticateUser = async (params) => {
 
   const body = {
@@ -17,14 +16,9 @@ export const authenticateUser = async (params) => {
   })
 
   const status = response.status;
-  //console.log({ status })
 
   if (status === 200) {
     return response.json();
-    // console.log(await response.json());
-    // return {
-    //   token: await response.json()
-    // }
   }
 
   if (status === 401) {
@@ -59,5 +53,33 @@ export const RegisterUser = async (params) => {
   return res;
 }
 
+export const CreatePost = async (params) => {
+  const body = {
+    "image_url": `${params.image_url}`,
+    "body": `${params.body}`,
+    "posted_by": `${localStorage.getItem('username')}`
+  }
+  
+  const response = await fetch(`${BASE_API_URL}/posts`, {
+    headers: {
+      'content-type': 'application/json',
+      'authorization': `${localStorage.getItem('token')}`
+    },
+    method: 'POST',
+    body: JSON.stringify(body)
+  })
 
+  return await response.json();
+}
 
+export const GetPosts = async () => {
+  const response = await fetch(`${BASE_API_URL}/posts`, {
+    headers: {
+      'content-type': 'application/json'
+    },
+    method: 'GET'
+  })
+
+  const res = await response.json();
+  return res.posts;
+}

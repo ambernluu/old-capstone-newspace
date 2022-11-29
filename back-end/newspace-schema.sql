@@ -16,3 +16,4 @@ CREATE TABLE posts (
     posted_at timestamp with time zone NOT NULL,
     posted_by text NOT NULL REFERENCES users(username)
 );
+

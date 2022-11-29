@@ -6,9 +6,7 @@
     "title": "Root Schema",
     "required": [
         "image_url",
-        "body",
-        "posted_at",
-        "posted_by"
+        "body"
     ],
     "properties": {
         "image_url": {
@@ -26,30 +24,12 @@
             "examples": [
                 "shfkjshfkjhsdkjfhsdjkfhjkshdfkjshdf"
             ]
-        },
-        "posted_at": {
-            "type": "string",
-            "default": 0,
-            "title": "The posted_at Schema",
-            "examples": [
-                "11-11-2022"
-            ]
-        },
-        "posted_by": {
-            "type": "string",
-            "default": "",
-            "title": "The posted_by Schema",
-            "examples": [
-                "username"
-            ]
         }
     },
     "examples": [
         {
             "image_url": "ssdfsdsdf.com",
-            "body": "shfkjshfkjhsdkjfhsdjkfhjkshdfkjshdf",
-            "posted_at": "11-26-2022",
-            "posted_by": "username"
+            "body": "shfkjshfkjhsdkjfhsdjkfhjkshdfkjshdf"
         }
     ]
 }

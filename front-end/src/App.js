@@ -8,10 +8,12 @@ import Login from "./Login";
 import Register from "./Register";
 import Profile from "./Profile"
 import Logout from "./Logout";
+import CreatePost from "./CreatePost";
 //<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
 const App = () => {
   const [user, setUser] = useState('');
+
   // const [documents, setDocuments] = useState(null);
 
   // useEffect(() => {
@@ -39,6 +41,8 @@ const App = () => {
           <Route path="/register" element={<Register />}>
           </Route>
           <Route path="/profile" element={<Profile user={user} />}>
+          </Route>
+          <Route path="/posts/new" element={<CreatePost user={user} />}>
           </Route>
          
         </Routes>

@@ -1,7 +1,5 @@
 "use strict";
 
-/** Convenience middleware to handle common auth cases in routes. */
-
 const jwt = require("jsonwebtoken");
 const { SECRET_KEY } = require("../config");
 const { UnauthorizedError } = require("../expressError");
@@ -10,14 +8,15 @@ const { UnauthorizedError } = require("../expressError");
 /** Middleware: Authenticate user.
  *
  * If a token was provided, verify it, and, if valid, store the token payload
- * on res.locals (this will include the username and isAdmin field.)
+ * on res.locals
  *
  * It's not an error if no token was provided or if the token is not valid.
  */
 
-function authenticateJWT(req, res, next) {
+const authenticateJWT = (req, res, next) => {
   try {
     const authHeader = req.headers && req.headers.authorization;
+
     if (authHeader) {
       const token = authHeader.replace(/^[Bb]earer /, "").trim();
       res.locals.user = jwt.verify(token, SECRET_KEY);
@@ -33,7 +32,7 @@ function authenticateJWT(req, res, next) {
  * If not, raises Unauthorized.
  */
 
-function ensureLoggedIn(req, res, next) {
+const ensureLoggedIn = (req, res, next) => {
   try {
     if (!res.locals.user) throw new UnauthorizedError();
     return next();
@@ -42,7 +41,7 @@ function ensureLoggedIn(req, res, next) {
   }
 }
 
-function ensureAdmin(req, res, next) {
+const ensureAdmin = (req, res, next) => {
   console.log("res.locals.user", res.locals.user);
   try {
     if (!res.locals.user || !res.locals.user.isAdmin) {
@@ -54,7 +53,7 @@ function ensureAdmin(req, res, next) {
   }  
 }
 
-function ensureAdminOrCorrectUser(req, res, next) {
+const ensureAdminOrCorrectUser = (req, res, next) =>{
   try {
     if ((!res.locals.user || !res.locals.user.isAdmin) && (res.locals.user.username !== req.params.username)) {
       throw new UnauthorizedError();
@@ -65,7 +64,7 @@ function ensureAdminOrCorrectUser(req, res, next) {
   }
 }
 
-function ensureCorrectUser(req, res, next) {
+const ensureCorrectUser = (req, res, next) => {
   try {
     if ((!res.locals.user) && (res.locals.user.username !== req.params.username)) {
       throw new UnauthorizedError();

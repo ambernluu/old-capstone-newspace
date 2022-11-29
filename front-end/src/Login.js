@@ -19,7 +19,7 @@ const Login = ({user, setUser}) => {
       </div>
     )
   }
-  return <Navigate push to="/profile" />
+  return <Navigate push to="/" />
 
 
 }

@@ -25,13 +25,13 @@ const LoginForm = ({ setData, setErr, setUser }) => {
             const token = await authenticateUser(formData);
             setData(formData);
             localStorage.setItem('username', formData.username);
-            localStorage.setItem('token', token.token)
+            localStorage.setItem('token', token.token);
+            
             setUser(localStorage.getItem('username'));
             setErr('');
             
         } catch (e) {
             console.log({ formData});
-            console.log(",msngsjdmfngkjsd,mfbngbjskd,fbngjksd,fgnjlsdfgnldjfn")
             setFormData(initialState);
             console.log({ formData });
             setErr(e);

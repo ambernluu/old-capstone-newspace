@@ -1,44 +1,7 @@
-import React, { useEffect } from "react";
-import { Navigate } from "react-router-dom";
-import { Card, CardBody, CardTitle, Button, Form } from "reactstrap";
-import CreatePost from "./CreatePost";
-import { GetPosts } from "./helpers/api";
-import ShowUserPosts from "./ShowUserPosts";
-
-const Profile = ({ user }) => {
-  const posts = GetPosts();
-  useEffect(() => {
-
-  },[posts])
-  console.log(posts)
-  if (user) {
-    return (
-      <section className="col-md-8">
-        <Card>
-          <CardBody className="text-center">
-            <CardTitle>
-              <h3 className="font-weight-bold">
-                Welcome {user}!
-                <CreatePost />
-                {/* <ShowUserPosts /> */}
-              </h3>
-            </CardTitle>
-          </CardBody>
-        </Card>
-      </section>
-    );
-  }
-  else return <Navigate to={'/login'} />
-  
-}
-
-export default Profile;
-
-// import { GetPosts } from './helpers/api';
+// import { useEffect } from 'react';
 // import { Col, Container, Row } from 'reactstrap';
+// import { GetPosts } from './helpers/api';
 // // Array of Data 
-
-// //GetPosts();
 
 // const StudentData = [
 //   {
@@ -65,9 +28,14 @@ export default Profile;
 // ]
 
 // let NewCard = () => {
+//   useEffect(() => {
+//     async function showPosts() {
+//       return await GetPosts();
+//     } showPosts();
+//   })
 //   return (
 //     <Row>
-//       {GetPosts.map((props) => {
+//       {StudentData.map((props) => {
 //         return (
 //           <Col sm={6} md={4} className='mt-3'>
 //             <div className="card" style={{ width: '18rem' }}>
