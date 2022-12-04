@@ -83,3 +83,47 @@ export const GetPosts = async () => {
   const res = await response.json();
   return res.posts;
 }
+export const SearchPosts = async (params) => {
+  const response = await fetch(`${BASE_API_URL}/posts/?body=${params.searchBody}}`, {
+    headers: {
+      'content-type': 'application/json'
+    },
+    method: 'GET'
+  })
+
+  const res = await response.json();
+  return res.posts;
+}
+
+export const UpdateUser = async (params) => {
+  const body = {
+    "firstName": `${params.firstName}`,
+    "lastName": `${params.lastName}`,
+    "email": `${params.email}`,
+
+  }
+  const response = await fetch(`${BASE_API_URL}/users/${localStorage.getItem('username')}`, {
+    headers: {
+      'content-type': 'application/json',
+      'authorization': `${localStorage.getItem('token')}`
+    },
+    method: 'PATCH',
+    body: JSON.stringify(body)
+  })
+
+  const res = await response.json();
+  return res;
+}
+
+// exports.handler = async (event) => {
+//   const response = {
+//     statusCode: 200,
+//     headers: {
+//       "Access-Control-Allow-Headers": "Content-Type",
+//       "Access-Control-Allow-Origin": "https://www.example.com",
+//       "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+//     },
+//     body: JSON.stringify('Hello from Lambda!'),
+//   };
+//   return response;
+// };

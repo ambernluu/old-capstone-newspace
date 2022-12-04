@@ -45,6 +45,7 @@ router.post("/", ensureLoggedIn, async function (req, res, next) {
  *
  * Can provide search filter in query:
  * -user
+ * -posted_by
 
  * Authorization required: none
  */
@@ -78,14 +79,6 @@ router.get("/:id", async function (req, res, next) {
 });
 
 
-/** PATCH /[postId]  { fld1, fld2, ... } => { post }
- *
- * Data can include: { title, salary, equity }
- *
- * Returns { id, title, salary, equity, companyHandle }
- *
- * Authorization required: admin
- */
 
 router.patch("/:id", ensureAdmin, async function (req, res, next) {
   try {

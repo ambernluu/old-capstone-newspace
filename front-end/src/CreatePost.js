@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
+import { Navigate } from 'react-router';
 import CreatePostForm from "./forms/CreatePostForm"
 
 
@@ -7,12 +8,15 @@ const CreatePost = () => {
   const [data, setData] = useState('');
 
   
-  return (
-    <div>
-      <CreatePostForm setData={setData} />
+  if (!data) {
+    return (
+      <div>
+        <CreatePostForm setData={setData} />
 
-    </div>
-  );
+      </div>
+    );
+  }
+  return <Navigate push to="/profile" />
 }
 
 export default CreatePost;

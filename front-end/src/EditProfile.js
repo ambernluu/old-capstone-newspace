@@ -1,12 +1,12 @@
 import React from "react";
 import { useState } from "react";
-import RegistrationForm from "./forms/EditProfileForm"
+import EditProfileForm from "./forms/EditProfileForm"
 
 
-function Register() {
+function EditProfile({user}) {
   const [data, setData] = useState('');
 
-  if (!data) return <RegistrationForm setData={setData} />
+  if (!data) return <EditProfileForm setData={setData} user={user} />
 
 
   return (
@@ -16,4 +16,4 @@ function Register() {
   );
 }
 
-export default Register;
+export default EditProfile;

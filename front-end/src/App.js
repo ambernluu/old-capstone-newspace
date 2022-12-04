@@ -9,6 +9,7 @@ import Register from "./Register";
 import Profile from "./Profile"
 import Logout from "./Logout";
 import CreatePost from "./CreatePost";
+import EditProfile from "./EditProfile";
 //<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
 const App = () => {
@@ -30,7 +31,7 @@ const App = () => {
       <BrowserRouter>
         <NavBar user={user} setUser={setUser} />
         <Routes>
-          <Route path="/" element={<Home />}>
+          <Route path="/" element={<Home user={user} />}>
           </Route>
           <Route path="/search" element={<SearchForm />}>
           </Route>
@@ -43,6 +44,8 @@ const App = () => {
           <Route path="/profile" element={<Profile user={user} />}>
           </Route>
           <Route path="/posts/new" element={<CreatePost user={user} />}>
+          </Route>
+          <Route path="/users/edit" element={<EditProfile user={user} />}>
           </Route>
          
         </Routes>

@@ -7,6 +7,12 @@ VALUES ('testuser',
         'User',
         'joel@joelburton.com',
         FALSE),
+        ('changster',
+        '$2b$12$8J3dTF7TpkLqzsZJWzTe3uU/mI8xs.GxMGV/hgD8pvVngAwN8bJjW',
+        'Amber',
+        'Woo',
+        'amber@email.com',
+        TRUE),
        ('testadmin',
         '$2b$12$AZH7virni5jlTTiGgEg4zu3lSvAw68qVEfSIOjJ3RqtbJbdW/Oi5q',
         'Test',
@@ -23,3 +29,10 @@ VALUES ('https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/cute-cat-p
         'I love dogs so so much',
         '11-26-2022',
         'testadmin');
+
+INSERT INTO usersfavoriteposts (username, post_id)
+VALUES ('changster', 
+        1)
+
+
+        

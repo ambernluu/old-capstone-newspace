@@ -24,14 +24,17 @@ const NavBar = ({user, setUser}) => {
             <NavLink to="/search">Search</NavLink>
           </NavItem>
           <NavItem>
-            <NavLink to="/profile">Profile</NavLink>
+            <NavLink to="/posts/new">New Post</NavLink>
           </NavItem>
           <NavItem>
+            <NavLink to="/profile">Profile</NavLink>
+          </NavItem>
+          {/* <NavItem>
             <NavLink to="/friends">Friends</NavLink>
           </NavItem>
           <NavItem>
             <NavLink to="/music">Music</NavLink>
-          </NavItem>
+          </NavItem> */}
         </Nav>}
         <Navbar>
           <NavItem>

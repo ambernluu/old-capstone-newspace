@@ -1,41 +1,16 @@
-// import { useEffect } from 'react';
-// import { Col, Container, Row } from 'reactstrap';
-// import { GetPosts } from './helpers/api';
-// // Array of Data 
+// // import { useEffect } from 'react';
+// // import { Col, Container, Row } from 'reactstrap';
+// // import { GetPosts } from './helpers/api';
 
-// const StudentData = [
-//   {
-//     Name: "Waji",
-//     Degree: "Bachlorrs"
-//   },
-//   {
-//     Name: "Zain",
-//     Degree: "Matric"
-//   },
-//   {
-//     Name: "Rahat",
-//     Degree: "B.Com"
-//   },
-//   {
-//     Name: "Wajahat",
-//     Degree: "Bachlorrs"
-//   },
-//   {
-//     Name: "Sabi",
-//     Degree: "Bachlorrs"
-//   }
+// // async function getStuff() {
+// //     const posts = await GetPosts();
+// // }
 
-// ]
-
-// let NewCard = () => {
-//   useEffect(() => {
-//     async function showPosts() {
-//       return await GetPosts();
-//     } showPosts();
-//   })
+// // const ShowUserPosts = () => {
+  
 //   return (
 //     <Row>
-//       {StudentData.map((props) => {
+//       {posts.map((props) => {
 //         return (
 //           <Col sm={6} md={4} className='mt-3'>
 //             <div className="card" style={{ width: '18rem' }}>
@@ -52,13 +27,28 @@
 //   )
 // }
 
-// export default function MyCard() {
-//   return (
-//     <Container>
-//       <NewCard
-//         title=''
-//         calss=''
-//       />
-//     </Container>
-//   )
-// }
+// // export default function MyCard() {
+// //   return (
+// //     <Container>
+// //       <ShowUserPosts
+// //       />
+// //     </Container>
+// //   )
+// // }
+
+
+// {/* <Row>
+//           {posts.map((p) => {
+//             return (
+//               <Col sm={6} md={4} className='mt-3'>
+//                 <div className="card" style={{ width: '18rem' }}>
+//                   <div className="card-body">
+//                     <h5 className="h5">{p.image_url}</h5>
+//                     <p className="card-text">{p.body}</p>
+//                     <a href="/" className="btn btn-primary">Click</a>
+//                   </div>
+//                 </div>
+//               </Col>
+//             )
+//           })}
+//         </Row> */}

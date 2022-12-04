@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
+import {SearchPosts} from "../helpers/api"
 //import { v4 as uuid } from 'uuid';
 
 const SearchForm = ({setData}) => {
@@ -16,14 +17,15 @@ const SearchForm = ({setData}) => {
         }))
     }
 
-    function setDataForParent(e) {
+    function handleSubmit(e) {
         e.preventDefault();
         console.log(e);
         setData(formData);
+        SearchPosts(formData);
     }
 
     return (
-        <form className="input-group p-3 m-0 border-0 bd-example" onSubmit={setDataForParent}>
+        <form className="input-group p-3 m-0 border-0 bd-example" onSubmit={handleSubmit}>
             <input
                 id="search"
                 className="form-control"

@@ -17,3 +17,7 @@ CREATE TABLE posts (
     posted_by text NOT NULL REFERENCES users(username)
 );
 
+CREATE TABLE usersfavoriteposts(
+    username VARCHAR (25),
+    post_id  int
+)
