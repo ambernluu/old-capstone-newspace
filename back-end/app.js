@@ -27,10 +27,10 @@ app.use("/auth", authRoutes);
 app.use("/users", usersRoutes);
 app.use("/posts", postsRoutes);
 
-app.options('/users/:username', cors()) // enable pre-flight request for PATCH request
-app.patch('/users/:username', cors(), function (req, res, next) {
-  res.json({ msg: 'This is CORS-enabled for all origins!' })
-})
+// app.options('/users/:username', cors()) // enable pre-flight request for PATCH request
+// app.patch('/users/:username', cors(), function (req, res, next) {
+//   res.json({ msg: 'This is CORS-enabled for all origins!' })
+// })
 
 // app.listen(80, function () {
 //   console.log('CORS-enabled web server listening on port 80')
