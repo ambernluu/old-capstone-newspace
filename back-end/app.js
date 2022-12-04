@@ -8,6 +8,13 @@ const cors = require("cors");
 const { NotFoundError } = require("./expressError");
 
 const { authenticateJWT } = require("./middleware/auth");
+const options = {
+  "origin": "*",
+  "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+  "preflightContinue": false,
+  "optionsSuccessStatus": 204
+}
+app.use(cors(options));
 const authRoutes = require("./routes/auth");
 const usersRoutes = require("./routes/users");
 const postsRoutes = require("./routes/posts");
@@ -17,8 +24,6 @@ const morgan = require("morgan");
 
 const app = express();
 
-// app.use(cors());
-// app.options('*', cors())
 app.use(express.json());
 app.use(morgan("tiny"));
 app.use(authenticateJWT);
@@ -27,14 +32,8 @@ app.use("/auth", authRoutes);
 app.use("/users", usersRoutes);
 app.use("/posts", postsRoutes);
 
-// app.options('/users/:username', cors()) // enable pre-flight request for PATCH request
-// app.patch('/users/:username', cors(), function (req, res, next) {
-//   res.json({ msg: 'This is CORS-enabled for all origins!' })
-// })
 
-// app.listen(80, function () {
-//   console.log('CORS-enabled web server listening on port 80')
-// })
+
 /** Handle 404 errors -- this matches everything */
 app.use(function (req, res, next) {
   return next(new NotFoundError());
