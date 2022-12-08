@@ -204,6 +204,51 @@ class User {
 
     if (!user) throw new NotFoundError(`No user: ${username}`);
   }
+
+  static async getUserLikedPosts(username) {
+    const userLikes = await db.query(
+      `SELECT post_id
+           FROM usersfavoriteposts
+           WHERE username = $1`,
+      [username],
+    );
+
+    const like = userLikes.rows;
+
+    if (!like) throw new NotFoundError(`No user: ${username}`);
+
+    return like;
+  }
+
+  static async addLike(username, post_id) {
+    const result = await db.query(
+      `INSERT INTO usersfavoriteposts
+           (username, post_id)
+           VALUES ($1, $2)
+           RETURNING username, post_id`,
+      [username, post_id],
+    );
+
+    const like = result.rows[0];
+
+    return like;
+  }
+
+  static async removeLike(username, post_id) {
+    const result = await db.query(
+      `DELETE
+      FROM usersfavoriteposts
+      WHERE username = $1 AND post_id = $2 
+      `,
+      [username, post_id],
+    );
+
+    const likeRes = result.rows[0];
+    console.log(likeRes)
+    if (!likeRes) throw new NotFoundError(`Relationship not found`);
+
+    return likeRes;
+  }
 }
 
 

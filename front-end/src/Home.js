@@ -1,17 +1,50 @@
 import React, { useEffect, useState } from "react";
 import { Card, CardBody, CardTitle } from "reactstrap";
 import { Navigate } from 'react-router';
-import { GetPosts } from "./helpers/api";
+import { GetPosts, GetLikes, SetLike} from "./helpers/api";
+//import Heart from "react-animated-heart";
 
 const Home = ({user}) => {
   const [posts, setPosts] = useState([]);
+  const [isClick, setClick] = useState(false);
 
   useEffect(() => {
     (async () => {
       const postRes = await GetPosts();
-      setPosts(postRes);
+      const likes = await userLikes();
+      console.log(likes)
+      const newArr = postRes.map(obj => {
+        for (let i = 0; i < likes.likes.length; i++) {
+          if (obj.id === likes.likes[i].post_id) {
+            obj.like = true;
+          }
+        }
+        return obj;
+      });
+      console.log({newArr})
+      setPosts(newArr);
     })();
   }, []);
+
+  const userLikes = async () => {
+    return await GetLikes(user);
+    //console.log("likes ", likes);
+    //console.log(posts);
+  }
+  
+  const handleLike = async (p) => {
+    await SetLike(p.post_id)
+    //console.log("p ", p.like);
+    // if (p.like === true) p.like = false;
+    
+
+    console.log(posts)
+    //here do the opposite thing like => !like
+    
+
+    
+  }
+
   const imgStyle = {
     maxHeight: 300,
     maxWidth: 300
@@ -19,15 +52,6 @@ const Home = ({user}) => {
   if (!user) return < Navigate to = { '/login'} />
   return (
     <section className="col-md-8">
-      {/* <Card>
-        <CardBody className="text-center">
-          <CardTitle>
-            <h3 className="font-weight-bold">
-              <a href="/posts/new" className="btn btn-secondary">Add new post</a>
-            </h3>
-          </CardTitle>
-        </CardBody>
-      </Card> */}
         <Card>
         <CardBody className="text-center">
           <CardTitle>
@@ -38,6 +62,7 @@ const Home = ({user}) => {
         </CardBody>
       </Card>
       {posts.map((p) => {
+        console.log(posts)
         return <Card>
           <CardBody className="text-center">
             <img
@@ -47,11 +72,11 @@ const Home = ({user}) => {
             />
             <CardTitle>
               <h3 className="font-weight-bold">
-               
                 <p>{p.body}</p>
               </h3>
             </CardTitle>
-            <h5>Posted by: {p.posted_by}</h5>
+            <p onClick={() => handleLike(p)}>{p.like ? "❤️" : "🤍"}</p>
+            <h5>Posted by: {p.posted_by}</h5> 
             <span>Posted at: {p.posted_at}</span>
           </CardBody>
         </Card>

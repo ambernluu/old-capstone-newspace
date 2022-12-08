@@ -72,6 +72,45 @@ export const CreatePost = async (params) => {
   return await response.json();
 }
 
+export const GetLikes = async (username) => {
+  const response = await fetch(`${BASE_API_URL}/users/${username}/likes`, {
+    headers: {
+      'content-type': 'application/json',
+      'authorization': `${localStorage.getItem('token')}`
+    },
+    method: 'GET'
+  })
+  return await response.json();
+
+}
+//****** ISSUE HERE IS THAT THIS MAKES A NEW LIKE/POST WE NEED TO CHECK IF IS EXISTING AND THEN TOGGLE IT */
+export const SetLike = async ({username, post_id}) => {
+  const body = {
+    "username": `${username}`,
+    "post_id": `${post_id}`
+  }
+
+  //check if exists
+  const likeRes = await fetch(`${BASE_API_URL}/users/${username}/likes`, {
+    headers: {
+      'content-type': 'application/json',
+      'authorization': `${localStorage.getItem('token')}`
+    },
+    method: 'GET'
+  })
+
+  const response = await fetch(`${BASE_API_URL}/users/${localStorage.getItem('username')}/likes`, {
+    headers: {
+      'content-type': 'application/json',
+      'authorization': `${localStorage.getItem('token')}`
+    },
+    method: 'POST',
+    body: JSON.stringify(body)
+  })
+
+  return await response.json();
+}
+
 export const GetPosts = async () => {
   const response = await fetch(`${BASE_API_URL}/posts`, {
     headers: {

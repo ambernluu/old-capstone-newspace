@@ -88,14 +88,35 @@ router.delete("/:username", ensureAdminOrCorrectUser, async function (req, res, 
   }
 });
 
-//POST apply for job (that user or admin)
-router.post("/:username/jobs/:id", ensureAdminOrCorrectUser, async function (req, res, next) {
+router.get("/:username/likes", async function (req, res, next) {
   try {
-    const jobId = + req.params.id;
-    await User.applyForJob(req.params.username, jobId);
-    return res.json({ applied: jobId });
+    const likes = await User.getUserLikedPosts(req.params.username);
+    return res.json({ likes });
   } catch (err) {
     return next(err);
   }
-})
+});
+
+router.post("/:username/likes", async function (req, res, next) {
+  try {
+    const { username, post_id } = req.body;
+    const like = await User.addLike(username, post_id);
+
+    return res.json({ like });
+  } catch (err) {
+    return next(err);
+  }
+});
+
+router.delete("/:username/likes/:post_id", ensureAdminOrCorrectUser, async function (req, res, next) {
+  try {
+    console.log(req.params.username);
+    console.log(req.params.post_id);
+    await User.removeLike(req.params.username, req.params.post_id);
+    return res.status;
+  } catch (err) {
+    return next(err);
+  }
+});
+
 module.exports = router;
