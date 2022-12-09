@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { Card, CardBody, CardTitle } from "reactstrap";
 import { Navigate } from 'react-router';
-import { GetPosts, GetLikes, SetLike} from "./helpers/api";
-//import Heart from "react-animated-heart";
+import { GetPosts, GetLikes, SetLike, RemoveLike } from "./helpers/api";
 
 const Home = ({user}) => {
   const [posts, setPosts] = useState([]);
-  const [isClick, setClick] = useState(false);
 
   useEffect(() => {
+    const userLikes = async () => {
+      return await GetLikes(user);
+    }
     (async () => {
       const postRes = await GetPosts();
       const likes = await userLikes();
-      console.log(likes)
+    
       const newArr = postRes.map(obj => {
         for (let i = 0; i < likes.likes.length; i++) {
           if (obj.id === likes.likes[i].post_id) {
@@ -21,28 +22,18 @@ const Home = ({user}) => {
         }
         return obj;
       });
-      console.log({newArr})
+    
       setPosts(newArr);
     })();
-  }, []);
+  }, [user, posts]);
 
-  const userLikes = async () => {
-    return await GetLikes(user);
-    //console.log("likes ", likes);
-    //console.log(posts);
-  }
+
   
   const handleLike = async (p) => {
-    await SetLike(p.post_id)
-    //console.log("p ", p.like);
-    // if (p.like === true) p.like = false;
-    
-
-    console.log(posts)
-    //here do the opposite thing like => !like
-    
-
-    
+    if (p.like === true) {
+      await RemoveLike(p);
+    }
+    await SetLike(p);  
   }
 
   const imgStyle = {
@@ -62,7 +53,6 @@ const Home = ({user}) => {
         </CardBody>
       </Card>
       {posts.map((p) => {
-        console.log(posts)
         return <Card>
           <CardBody className="text-center">
             <img

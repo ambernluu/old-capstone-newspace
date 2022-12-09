@@ -20,15 +20,15 @@ const NavBar = ({user, setUser}) => {
           <NavItem>
             <NavLink to="/">Home</NavLink>
           </NavItem> 
-          <NavItem>
+          {/* <NavItem>
             <NavLink to="/search">Search</NavLink>
-          </NavItem>
+          </NavItem> */}
           <NavItem>
             <NavLink to="/posts/new">New Post</NavLink>
           </NavItem>
-          <NavItem>
+          {/* <NavItem>
             <NavLink to="/profile">Profile</NavLink>
-          </NavItem>
+          </NavItem> */}
           {/* <NavItem>
             <NavLink to="/friends">Friends</NavLink>
           </NavItem>

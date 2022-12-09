@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
-import RegistrationForm from "./forms/EditProfileForm"
+import RegistrationForm from "./forms/RegistrationForm";
+import { Navigate } from 'react-router';
 
 
 function Register() {
@@ -9,11 +10,8 @@ function Register() {
   if (!data) return <RegistrationForm setData={setData} />
 
 
-  return (
-    <div>
-      <p> Welcome {data.username}! </p>
-    </div>
-  );
+  
+  return <Navigate push to="/" />
 }
 
 export default Register;

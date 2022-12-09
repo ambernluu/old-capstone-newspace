@@ -112,8 +112,8 @@ router.delete("/:username/likes/:post_id", ensureAdminOrCorrectUser, async funct
   try {
     console.log(req.params.username);
     console.log(req.params.post_id);
-    await User.removeLike(req.params.username, req.params.post_id);
-    return res.status;
+    await User.deleteLike(req.params.username, req.params.post_id);
+    return res.json();
   } catch (err) {
     return next(err);
   }

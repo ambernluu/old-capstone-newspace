@@ -83,23 +83,30 @@ export const GetLikes = async (username) => {
   return await response.json();
 
 }
-//****** ISSUE HERE IS THAT THIS MAKES A NEW LIKE/POST WE NEED TO CHECK IF IS EXISTING AND THEN TOGGLE IT */
-export const SetLike = async ({username, post_id}) => {
-  const body = {
-    "username": `${username}`,
-    "post_id": `${post_id}`
-  }
-
-  //check if exists
-  const likeRes = await fetch(`${BASE_API_URL}/users/${username}/likes`, {
+export const RemoveLike = async ({ id }) => {
+  const user = localStorage.getItem('username');
+  const response = await fetch(`${BASE_API_URL}/users/${user}/likes/${id}`, {
     headers: {
       'content-type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Z-Key',
+      'Access-Control-Allow-Methods': 'GET, HEAD, POST, PUT, PATCH, DELETE, OPTIONS',
       'authorization': `${localStorage.getItem('token')}`
     },
-    method: 'GET'
-  })
+    method: 'DELETE'
+  });
+  return await response.json();
 
-  const response = await fetch(`${BASE_API_URL}/users/${localStorage.getItem('username')}/likes`, {
+}
+
+export const SetLike = async ({ id }) => {
+  const user = localStorage.getItem('username');
+  const body = {
+    "username": `${user}`,
+    "post_id": `${id}`
+  }
+
+  const response = await fetch(`${BASE_API_URL}/users/${user}/likes`, {
     headers: {
       'content-type': 'application/json',
       'authorization': `${localStorage.getItem('token')}`
@@ -144,6 +151,9 @@ export const UpdateUser = async (params) => {
   const response = await fetch(`${BASE_API_URL}/users/${localStorage.getItem('username')}`, {
     headers: {
       'content-type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Z-Key',
+      'Access-Control-Allow-Methods': 'GET, HEAD, POST, PUT, PATCH, DELETE, OPTIONS',
       'authorization': `${localStorage.getItem('token')}`
     },
     method: 'PATCH',

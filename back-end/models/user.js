@@ -142,23 +142,6 @@ class User {
     return user;
   }
 
-  /** Update user data with `data`.
-   *
-   * This is a "partial update" --- it's fine if data doesn't contain
-   * all the fields; this only changes provided ones.
-   *
-   * Data can include:
-   *   { firstName, lastName, password, email, isAdmin }
-   *
-   * Returns { username, firstName, lastName, email, isAdmin }
-   *
-   * Throws NotFoundError if not found.
-   *
-   * WARNING: this function can set a new password or make a user an admin.
-   * Callers of this function must be certain they have validated inputs to this
-   * or a serious security risks are opened.
-   */
-
   static async update(username, data) {
     if (data.password) {
       data.password = await bcrypt.hash(data.password, BCRYPT_WORK_FACTOR);
@@ -234,8 +217,8 @@ class User {
     return like;
   }
 
-  static async removeLike(username, post_id) {
-    const result = await db.query(
+  static async deleteLike(username, post_id) {
+    const res = await db.query(
       `DELETE
       FROM usersfavoriteposts
       WHERE username = $1 AND post_id = $2 
@@ -243,11 +226,7 @@ class User {
       [username, post_id],
     );
 
-    const likeRes = result.rows[0];
-    console.log(likeRes)
-    if (!likeRes) throw new NotFoundError(`Relationship not found`);
-
-    return likeRes;
+    return res;
   }
 }
 
