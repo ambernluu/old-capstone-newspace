@@ -5,7 +5,6 @@ const { NotFoundError } = require("../expressError");
 const { sqlForPartialUpdate } = require("../helpers/sql");
 
 
-/** Related functions for companies. */
 
 class Post {
   /** Create a post (from data), update db, return new post data.
@@ -74,14 +73,6 @@ class Post {
     return postsRes.rows;
   }
 
-  /** Given a post id, return data about post.
-   *
-   * Returns { id, title, salary, equity, companyHandle, company }
-   *   where company is { handle, name, description, numEmployees, logoUrl }
-   *
-   * Throws NotFoundError if not found.
-   **/
-
   static async get(id) {
     const postRes = await db.query(
       `SELECT p.id,
@@ -98,55 +89,6 @@ class Post {
     return post;
   }
 
-  /** Update post data with `data`.
-   *
-   * This is a "partial update" --- it's fine if data doesn't contain
-   * all the fields; this only changes provided ones.
-   *
-   * Data can include: { title, salary, equity }
-   *
-   * Returns { id, title, salary, equity, companyHandle }
-   *
-   * Throws NotFoundError if not found.
-   */
-
-  static async update(id, data) {
-    const { setCols, values } = sqlForPartialUpdate(
-      data,
-      {});
-    const idVarIdx = "$" + (values.length + 1);
-
-    const querySql = `UPDATE posts 
-                      SET ${setCols} 
-                      WHERE id = ${idVarIdx} 
-                      RETURNING id, 
-                                title, 
-                                salary, 
-                                equity,
-                                company_handle AS "companyHandle"`;
-    const result = await db.query(querySql, [...values, id]);
-    const post = result.rows[0];
-
-    if (!post) throw new NotFoundError(`No post: ${id}`);
-
-    return post;
-  }
-
-  /** Delete given post from database; returns undefined.
-   *
-   * Throws NotFoundError if company not found.
-   **/
-
-  static async remove(id) {
-    const result = await db.query(
-      `DELETE
-           FROM posts
-           WHERE id = $1
-           RETURNING id`, [id]);
-    const post = result.rows[0];
-
-    if (!post) throw new NotFoundError(`No post: ${id}`);
-  }
 }
 
 module.exports = Post;
