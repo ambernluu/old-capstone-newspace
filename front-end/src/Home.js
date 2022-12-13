@@ -25,10 +25,8 @@ const Home = ({user}) => {
     
       setPosts(newArr);
     })();
-  }, [user, posts]);
+  }, [user, setPosts, posts]);
 
-
-  
   const handleLike = async (p) => {
     if (p.like === true) {
       await RemoveLike(p);

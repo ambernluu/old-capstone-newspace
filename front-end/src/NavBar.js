@@ -10,7 +10,7 @@ const NavBar = ({user, setUser}) => {
       setUser(localStorage.getItem('username'));
     }
     isLoggedIn();
-  }, [user]);
+  }, [setUser]);
   
 
   return (
