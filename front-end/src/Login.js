@@ -16,8 +16,6 @@ const Login = ({user, setUser}) => {
     )
   }
   return <Navigate push to="/" />
-
-
 }
 
 export default Login;
