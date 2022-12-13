@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import { Form, Label, Input, Button, Row, Col } from "reactstrap";
 import { authenticateUser } from '../helpers/api';
-import  isLoggedIn from "../NavBar";
 
 const LoginForm = ({ setData, setErr, setUser }) => {
     const initialState = {
