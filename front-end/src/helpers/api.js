@@ -1,4 +1,4 @@
-const BASE_API_URL = "http://localhost:5000";
+const BASE_API_URL = "http://localhost:5000" || "https://newspace-client.herokuapp.com/";
 
 export const authenticateUser = async (params) => {
 
