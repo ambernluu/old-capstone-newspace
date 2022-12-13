@@ -1,5 +1,4 @@
 "use strict";
-
 /** Express app for NewSpace. */
 const authRoutes = require("./routes/auth");
 const usersRoutes = require("./routes/users");
