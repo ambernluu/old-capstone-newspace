@@ -1,5 +1,5 @@
 # capstone-newspace
-new space app @ https://github.com/ambernluu/capstone-newspace
+new space app @ https://capstone-client.herokuapp.com/
 
 This app is blogging application. 
 
